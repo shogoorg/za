@@ -1,6 +1,6 @@
 import os
 import dotenv
-from za import tools  # mcp_bakery_app から za に変更
+from sources import tools  #  sourcesに変更
 from google.adk.agents import LlmAgent
 
 dotenv.load_dotenv()
@@ -16,11 +16,11 @@ root_agent = LlmAgent(
     instruction=f"""
                 Help the user answer questions by strategically combining insights from two sources:
                 
-                1.  **BigQuery toolset:** Access facility-level emissions, national rankings, and administrative data in the 'za' dataset. Do not use any other dataset.
+                1.  **BigQuery toolset:** Access facility-level emissions, administrative data in the 'sources' dataset. Do not use any other dataset.
                 Run all query jobs from project id: {PROJECT_ID}.
 
                 2.  **Maps Toolset:** Use this for geographic analysis of emission sources (e.g., factories, power plants) and visualizing their locations.
                 Include a hyperlink to an interactive map in your response where appropriate.
-            """,
+            """, #  sourcesに変更
     tools=[maps_toolset, bigquery_toolset]
 )
