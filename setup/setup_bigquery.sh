@@ -2,7 +2,9 @@
 
 PROJECT_ID=$(gcloud config get-value project)
 DATASET_NAME="sources"
-LOCATION="asia-northeast1"
+ADMIN_DATASET_NAME="admin"
+
+LOCATION="US"
 
 # Generate bucket name if not provided
 if [ -z "$1" ]; then
@@ -16,6 +18,7 @@ echo "----------------------------------------------------------------"
 echo "Setup"
 echo "Project: $PROJECT_ID"
 echo "Dataset: $DATASET_NAME"
+echo "ADMIN Dataset: $ADMIN_DATASET_NAME"
 echo "Bucket:  $BUCKET_NAME"
 echo "----------------------------------------------------------------"
 
@@ -39,6 +42,16 @@ if bq show "$PROJECT_ID:$DATASET_NAME" >/dev/null 2>&1; then
 else    
     bq mk --location=$LOCATION --dataset \
         "$PROJECT_ID:$DATASET_NAME"
+    echo "      Dataset created."
+fi
+
+# Create Dataset
+echo "Creating Dataset '$ADMIN_DATASET_NAME'..."
+if bq show "$PROJECT_ID:$ADMIN_DATASET_NAME" >/dev/null 2>&1; then
+    echo "      Dataset already exists. Skipping creation."
+else    
+    bq mk --location=$LOCATION --dataset \
+        "$PROJECT_ID:$ADMIN_DATASET_NAME"
     echo "      Dataset created."
 fi
 
@@ -92,6 +105,25 @@ OPTIONS(
 
 bq load --source_format=CSV --skip_leading_rows=1 --replace \
     "$PROJECT_ID:$DATASET_NAME.admins" "$BUCKET_NAME/admins.csv"
+
+# Create Admins Table
+echo "Setting up Table: admins..."
+bq query --use_legacy_sql=false \
+"CREATE OR REPLACE TABLE \`$PROJECT_ID.$ADMIN_DATASET_NAME.admins\` (
+    id STRING OPTIONS(description='GADM ID'),
+    name STRING OPTIONS(description='Administrative area name'),
+    full_name STRING OPTIONS(description='Full name with country code'),
+    level INT64 OPTIONS(description='Hierarchy level (0=Country, 1=Prefecture, 2=City)'),
+    level_0_id STRING,
+    level_1_id STRING,
+    level_2_id STRING
+)
+OPTIONS(
+    description='Administrative boundary master data.'
+);"
+
+bq load --source_format=CSV --skip_leading_rows=1 --replace \
+    "$PROJECT_ID:$ADMIN_DATASET_NAME.admins" "$BUCKET_NAME/admins.csv"
 
 echo "----------------------------------------------------------------"
 echo "Setup Complete!"
