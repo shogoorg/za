@@ -1,26 +1,26 @@
 #!/bin/bash
 
 PROJECT_ID=$(gcloud config get-value project)
-DATASET_NAME="za"
+DATASET_NAME="sources"
 LOCATION="asia-northeast1"
 
 # Generate bucket name if not provided
 if [ -z "$1" ]; then
-    BUCKET_NAME="gs://za-$PROJECT_ID"
+    BUCKET_NAME="gs://sources-$PROJECT_ID"
     echo "No bucket provided. Using default: $BUCKET_NAME"
 else
     BUCKET_NAME=$1
 fi
 
 echo "----------------------------------------------------------------"
-echo "Climate TRACE Demo Setup"
+echo "Setup"
 echo "Project: $PROJECT_ID"
 echo "Dataset: $DATASET_NAME"
 echo "Bucket:  $BUCKET_NAME"
 echo "----------------------------------------------------------------"
 
-# 1. Create Bucket if it doesn't exist
-echo "[1/7] Checking bucket $BUCKET_NAME..."
+# Create Bucket if it doesn't exist
+echo "Checking bucket $BUCKET_NAME..."
 if gcloud storage buckets describe $BUCKET_NAME >/dev/null 2>&1; then
     echo "      Bucket already exists."
 else
@@ -28,12 +28,12 @@ else
     gcloud storage buckets create $BUCKET_NAME --location=$LOCATION
 fi
 
-# 2. Upload Data
-echo "[2/7] Uploading data to $BUCKET_NAME..."
+# Upload Data
+echo "Uploading data to $BUCKET_NAME..."
 gcloud storage cp data/*.csv $BUCKET_NAME
 
-# 3. Create Dataset
-echo "[3/7] Creating Dataset '$DATASET_NAME'..."
+# Create Dataset
+echo "Creating Dataset '$DATASET_NAME'..."
 if bq show "$PROJECT_ID:$DATASET_NAME" >/dev/null 2>&1; then
     echo "      Dataset already exists. Skipping creation."
 else    
@@ -42,8 +42,8 @@ else
     echo "      Dataset created."
 fi
 
-# 4. Create Sources Table
-echo "[4/7] Setting up Table: sources..."
+# Create Sources Table
+echo "Setting up Table: sources..."
 bq query --use_legacy_sql=false \
 "CREATE OR REPLACE TABLE \`$PROJECT_ID.$DATASET_NAME.sources\` (
     id STRING OPTIONS(description='Unique ID of the asset'),
@@ -68,34 +68,14 @@ bq query --use_legacy_sql=false \
     year INT64 OPTIONS(description='Data year')
 )
 OPTIONS(
-    description='Individual point-source emission data from Climate TRACE.'
+    description='Individual point-source emission data'
 );"
 
 bq load --source_format=CSV --skip_leading_rows=1 --replace \
     "$PROJECT_ID:$DATASET_NAME.sources" "$BUCKET_NAME/sources.csv"
 
-# 5. Create Countries Table
-echo "[5/7] Setting up Table: countries..."
-bq query --use_legacy_sql=false \
-"CREATE OR REPLACE TABLE \`$PROJECT_ID.$DATASET_NAME.countries\` (
-    rank INT64 OPTIONS(description='Global emission rank'),
-    country_code STRING OPTIONS(description='ISO 3-letter country code'),
-    name STRING OPTIONS(description='Country name'),
-    gas STRING OPTIONS(description='Greenhouse gas type'),
-    emissionsQuantity FLOAT64 OPTIONS(description='Total annual emissions'),
-    emissionsPerCapita FLOAT64 OPTIONS(description='Emissions per capita'),
-    percentage FLOAT64 OPTIONS(description='Percentage of global total'),
-    emissionsPercentChange FLOAT64 OPTIONS(description='Year-over-year percentage change')
-)
-OPTIONS(
-    description='National level emission rankings and summary stats.'
-);"
-
-bq load --source_format=CSV --skip_leading_rows=1 --replace \
-    "$PROJECT_ID:$DATASET_NAME.countries" "$BUCKET_NAME/countries.csv"
-
-# 6. Create Admins Table
-echo "[6/7] Setting up Table: admins..."
+# Create Admins Table
+echo "Setting up Table: admins..."
 bq query --use_legacy_sql=false \
 "CREATE OR REPLACE TABLE \`$PROJECT_ID.$DATASET_NAME.admins\` (
     id STRING OPTIONS(description='GADM ID'),
@@ -112,9 +92,6 @@ OPTIONS(
 
 bq load --source_format=CSV --skip_leading_rows=1 --replace \
     "$PROJECT_ID:$DATASET_NAME.admins" "$BUCKET_NAME/admins.csv"
-
-# 7. Step 7 TODO
-echo "[7/7] TODO"
 
 echo "----------------------------------------------------------------"
 echo "Setup Complete!"

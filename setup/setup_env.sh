@@ -27,7 +27,7 @@ fi
 # Create API Key
 echo "Creating Google Maps Platform API Key..."
 
-API_KEY_NAME="za-key-$(date +%s)"
+API_KEY_NAME="za-key"
 API_KEY_JSON=$(gcloud alpha services api-keys create --display-name="$API_KEY_NAME" \
     --api-target=service=mapstools.googleapis.com \
     --format=json 2>/dev/null)
@@ -50,7 +50,7 @@ fi
 
 # Create .env file
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ENV_FILE="$SCRIPT_DIR/../adk_agent/za/.env"
+ENV_FILE="$SCRIPT_DIR/../adk_agent/sources/.env"
 mkdir -p $(dirname "$ENV_FILE")
 
 cat <<EOF > "$ENV_FILE"
