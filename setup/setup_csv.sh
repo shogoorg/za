@@ -54,7 +54,8 @@ done
 
 # --- Administrative Areas ---
 echo "Fetching administrative areas..."
-curl -s 'https://api.climatetrace.org/v7/admins?name=JPN&level=0&limit=100&offset=0' \
+#curl -s 'https://api.climatetrace.org/v7/admins?name=JPN&level=0&limit=100&offset=0' \
+curl -s 'https://api.climatetrace.org/v7/admins/JPN/subdivisions' \
 | jq -r '
   ["id", "name", "full_name", "level", "level_0_id", "level_1_id", "level_2_id"], 
   (.[] | [.id, .name, .full_name, .level, .level_0_id, .level_1_id, .level_2_id]) 
