@@ -1,14 +1,13 @@
 #!/bin/bash
 
 PROJECT_ID=$(gcloud config get-value project)
-DATASET_NAME="sources"
-ADMIN_DATASET_NAME="admin"
+DATASET_NAME="za"
 
 LOCATION="US"
 
 # Generate bucket name if not provided
 if [ -z "$1" ]; then
-    BUCKET_NAME="gs://sources-$PROJECT_ID"
+    BUCKET_NAME="gs://za-data-$PROJECT_ID" 
     echo "No bucket provided. Using default: $BUCKET_NAME"
 else
     BUCKET_NAME=$1
@@ -18,7 +17,6 @@ echo "----------------------------------------------------------------"
 echo "Setup"
 echo "Project: $PROJECT_ID"
 echo "Dataset: $DATASET_NAME"
-echo "ADMIN Dataset: $ADMIN_DATASET_NAME"
 echo "Bucket:  $BUCKET_NAME"
 echo "----------------------------------------------------------------"
 
@@ -42,16 +40,6 @@ if bq show "$PROJECT_ID:$DATASET_NAME" >/dev/null 2>&1; then
 else    
     bq mk --location=$LOCATION --dataset \
         "$PROJECT_ID:$DATASET_NAME"
-    echo "      Dataset created."
-fi
-
-# Create Dataset
-echo "Creating Dataset '$ADMIN_DATASET_NAME'..."
-if bq show "$PROJECT_ID:$ADMIN_DATASET_NAME" >/dev/null 2>&1; then
-    echo "      Dataset already exists. Skipping creation."
-else    
-    bq mk --location=$LOCATION --dataset \
-        "$PROJECT_ID:$ADMIN_DATASET_NAME"
     echo "      Dataset created."
 fi
 
@@ -109,7 +97,7 @@ bq load --source_format=CSV --skip_leading_rows=1 --replace \
 # Create Admins Table
 echo "Setting up Table: admins..."
 bq query --use_legacy_sql=false \
-"CREATE OR REPLACE TABLE \`$PROJECT_ID.$ADMIN_DATASET_NAME.admins\` (
+"CREATE OR REPLACE TABLE \`$PROJECT_ID.$DATASET_NAME.admins\` (
     id STRING OPTIONS(description='GADM ID'),
     name STRING OPTIONS(description='Administrative area name'),
     full_name STRING OPTIONS(description='Full name with country code'),
@@ -123,7 +111,7 @@ OPTIONS(
 );"
 
 bq load --source_format=CSV --skip_leading_rows=1 --replace \
-    "$PROJECT_ID:$ADMIN_DATASET_NAME.admins" "$BUCKET_NAME/admins.csv"
+    "$PROJECT_ID:$DATASET_NAME.admins" "$BUCKET_NAME/admins.csv"
 
 echo "----------------------------------------------------------------"
 echo "Setup Complete!"

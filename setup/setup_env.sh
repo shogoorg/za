@@ -50,7 +50,7 @@ fi
 
 # Create .env file
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ENV_FILE="$SCRIPT_DIR/../adk_agent/sources/.env"
+ENV_FILE="$SCRIPT_DIR/../adk_agent/za/.env"
 mkdir -p $(dirname "$ENV_FILE")
 
 cat <<EOF > "$ENV_FILE"
