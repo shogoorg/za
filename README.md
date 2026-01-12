@@ -15,16 +15,10 @@ cd za
 ### 2. Authenticate with Google Cloud
 
 ```bash
-gcloud config set project [YOUR-PROJECT-ID]
 gcloud auth application-default login
-```
-
-```bash
-gcloud auth list
-gcloud config get project
+gcloud config set project [YOUR-PROJECT-ID]
 export PROJECT_ID=$(gcloud config get project)
-MCP_USER=<ENTER_USER_EMAIL>
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="user:$MCP_USER" --role="roles/mcp.toolUser"
+
 ```
 
 ### 3. Configure Environment
@@ -95,11 +89,9 @@ adk web
 
 ### 6. Chat with the Agent
 
-*   "Please list the top 5 facilities in Japan with the highest CO2 emissions, including their respective sector names."
-*   "Identify the major steel plants in Chiba Prefecture with high emissions and show their locations on a map."
 
 *   "日本でCO2排出量が最も多い施設トップ5を教えてください。セクター名も含めて。"
-*   "千葉県にある排出量の多い鉄鋼所（Steel plant）を探して、その場所を地図で示してください。"
+*   "日本の都道府県を教えてください。レベルIDを含めて。"
 
 
 ### 7. Cleanup
