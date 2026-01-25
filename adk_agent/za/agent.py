@@ -16,7 +16,7 @@ root_agent = LlmAgent(
     instruction=f"""
                 Help the user answer questions by strategically combining insights from two sources:
                 
-                1.  **BigQuery toolset:** Access facility-level emissions, national rankings, and administrative data in the 'za' dataset. Do not use any other dataset.
+                1.  **BigQuery toolset:** Access facility-level emissions, and administrative data in the 'za' dataset. Do not use any other dataset.
                 Run all query jobs from project id: {PROJECT_ID}.
 
                 2.  **Maps Toolset:** Use this for geographic analysis of emission sources (e.g., factories, power plants) and visualizing their locations.
