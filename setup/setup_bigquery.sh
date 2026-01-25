@@ -94,25 +94,6 @@ OPTIONS(
 bq load --source_format=CSV --skip_leading_rows=1 --replace \
     "$PROJECT_ID:$DATASET_NAME.admins" "$BUCKET_NAME/admins.csv"
 
-# Create Admins Table
-echo "Setting up Table: admins..."
-bq query --use_legacy_sql=false \
-"CREATE OR REPLACE TABLE \`$PROJECT_ID.$DATASET_NAME.admins\` (
-    id STRING OPTIONS(description='GADM ID'),
-    name STRING OPTIONS(description='Administrative area name'),
-    full_name STRING OPTIONS(description='Full name with country code'),
-    level INT64 OPTIONS(description='Hierarchy level (0=Country, 1=Prefecture, 2=City)'),
-    level_0_id STRING,
-    level_1_id STRING,
-    level_2_id STRING
-)
-OPTIONS(
-    description='Administrative boundary master data.'
-);"
-
-bq load --source_format=CSV --skip_leading_rows=1 --replace \
-    "$PROJECT_ID:$DATASET_NAME.admins" "$BUCKET_NAME/admins.csv"
-
 echo "----------------------------------------------------------------"
 echo "Setup Complete!"
 echo "----------------------------------------------------------------"
