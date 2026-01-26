@@ -51,6 +51,10 @@ chmod +x setup/setup_env.sh
 ### 4. Provision BigQuery
 
 ```bash
+python3 setup/setup_csv.py
+```
+
+```bash
 dos2unix setup/setup_csv.sh
 chmod +x setup/setup_csv.sh
 ./setup/setup_csv.sh
