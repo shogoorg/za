@@ -66,7 +66,8 @@ bq query --use_legacy_sql=false \
     capacity FLOAT64 OPTIONS(description='Max capacity of the facility'),
     capacityUnits STRING OPTIONS(description='Units of capacity'),
     capacityFactor FLOAT64 OPTIONS(description='Capacity utilization factor'),
-    year INT64 OPTIONS(description='Data year')
+    year INT64 OPTIONS(description='Data year'),
+    gadm_id STRING OPTIONS(description='GADM ID for joining with admins table') 
 )
 OPTIONS(
     description='Individual point-source emission data'
