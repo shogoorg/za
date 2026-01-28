@@ -55,12 +55,6 @@ python3 setup/setup_csv.py
 ```
 
 ```bash
-dos2unix setup/setup_csv.sh
-chmod +x setup/setup_csv.sh
-./setup/setup_csv.sh
-```
-
-```bash
 dos2unix setup/setup_bigquery.sh
 chmod +x setup/setup_bigquery.sh
 ./setup/setup_bigquery.sh
@@ -90,30 +84,29 @@ cd adk_agent/
 # Run the ADK web interface
 adk web
 ```
-
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 
-Follow this sequence to see how the agent moves from national statistics to local action:
+*   **PURPOSE**: Develop a precise reduction strategy by benchmarking against the most efficient facility within a successful region and forecasting the potential impact if this efficiency is applied to the worst performer in the same region/subsector.
 
-1. **Spotting the Issue:**
-   "Show me the top 3 emission sources in Japan for 2024. I want to identify where the most urgent intervention is needed."
-   (最も対策が必要な場所を特定するため、日本の排出量ワースト3を教えて。)
+1.  **STEP: Location Selection (Identifying Top Reducing Prefecture)**
+    *   **ENGLISH QUESTION**: "Identify the single prefecture (`admin_name`) in Japan that achieved the **largest total emission reduction** between 2024 and 2025."
+    *   **日本語 (ユーザーの質問)**: 「2024年から2025年にかけて、**総排出削減量が最も大きかった**都道府県を日本全国から1つ特定してください。」
 
-2. **Understanding the Context:**
-   "For those top 3, what is the industry mix? Are they mostly 'Coal' power plants or 'BF/BOF' manufacturing? I need to know the primary driver."
-   (ワースト3の産業構成は？石炭火力ですか、それとも製鉄所ですか？主な原因を知りたいです。)
+2.  **STEP: Success Model Definition (Benchmarking Best Efficiency)**
+    *   **ENGLISH QUESTION**: "For the prefecture identified in Step 1, find the single facility within that prefecture's **most successful `subsector`** (the one contributing most to the prefectural reduction) that has the **lowest 2025 `emissionsFactor`**. This facility sets the 'Efficiency Target Benchmark'."
+    *   **日本語 (ユーザーの質問)**: 「ステップ1で特定した都道府県の中で、その都道府県の**最も削減に貢献したサブセクター**を特定してください。そのサブセクターにおいて、2025年の`emissionsFactor`が最も低かった施設を見つけてください。これが『効率性目標ベンチマーク』です。」
 
-3. **Setting the Benchmark:**
-   "What is the maximum 'emissionsQuantity' for a single facility in Japan? I want to see how far the top facility is from the national average."
-   (日本国内の単一施設の最大排出量は？トップの施設が全国平均からどれだけ突出しているか確認したい。)
+3.  **STEP**: Identifying Target Facility (Worst Performer in the Same Sector/Region)
+    *   **ENGLISH QUESTION**: "Now, focus on the **same `subsector`** identified in Step 2. Identify the single facility **within that same prefecture** (from Step 1) that had the **highest 2025 `emissionsQuantity`** for that subsector. This facility is the primary target for immediate best-practice transfer."
+    *   **日本語 (ユーザーの質問)**: 「ステップ2で特定された**同じサブセクター**に焦点を当てます。そして、ステップ1で特定された**同じ都道府県内**で、2025年の`subsector`における**排出量が最も多い**単一施設を特定してください。これが即時ベストプラクティス展開のターゲット施設となります。」
 
-4. **Predicting Impact (Forecasting):**
-   "Take the #1 emitting facility. Based on its 'activity' data, if we reduce its operations by 15% next year, what is the projected emission amount for 2025?"
-   (排出1位の施設について、もし来年その活動量を15%削減した場合、2025年の予測排出量はいくらになりますか？)
+4.  **STEP**: Impact Forecasting (Quantifying the Gain)
+    *   **ENGLISH QUESTION**: "If the high-emitting target facility (Step 3) could achieve the **same `emissionsFactor` as the benchmark facility** (Step 2), what would be the **projected 2025 emission quantity** for that target facility? State the projected reduction amount."
+    *   **日本語 (ユーザーの質問)**: 「ターゲット施設（ステップ3）が、ベンチマーク施設（ステップ2）と**同じ排出係数を達成できた**と仮定した場合、その施設の2025年の**予測排出量**はいくらになりますか？予測される削減量も提示してください。」
 
-5. **Local Impact Verification:**
-   "Lastly, find the nearest 'City Hall' or residential center to this facility. Provide a map link to assess how its emissions might affect the local community."
-   (最後に、その施設に最も近い市役所や居住エリアを探して、地図リンクでその距離感を確認させて。)
+5.  **STEP**: Logistics Verification (Feasibility Check)
+    *   **ENGLISH QUESTION**: "Provide a map link showing the location of the Top Reducing Prefecture center (Step 1) and the Target Facility (Step 3). Calculate the driving distance between them to assess the feasibility of direct technical consultation."
+    *   **日本語 (ユーザーの質問)**: 「削減量トップの都道府県（ステップ1）と主要ターゲット施設（ステップ3）の場所を示す地図リンクを提供し、両施設間の車での移動距離を計算してください。これは、専門家チームによる知識移転の実現可能性を評価するために役立ちます。」
 
 ### 7. Cleanup
 ```bash
