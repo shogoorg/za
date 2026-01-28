@@ -86,15 +86,15 @@ adk web
 ```
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 
-*   **PURPOSE**: Develop a precise reduction strategy by benchmarking against the most efficient facility within a successful region and forecasting the potential impact if this efficiency is applied to the worst performer in the same region/subsector.
+*   **PURPOSE**: Develop a precise reduction strategy by benchmarking against the most efficient, *highly utilized* facility within a successful region and forecasting the potential impact if this efficiency is applied to the worst performer in the same region.
 
-1.  **STEP: Location Selection (Identifying Top Reducing Prefecture)**
+1.  **STEP: Location Selection (Identifying High-Demand Area/Top Reduction Prefecture)**
     *   **ENGLISH QUESTION**: "Identify the single prefecture (`admin_name`) in Japan that achieved the **largest total emission reduction** between 2024 and 2025."
     *   **日本語 (ユーザーの質問)**: 「2024年から2025年にかけて、**総排出削減量が最も大きかった**都道府県を日本全国から1つ特定してください。」
 
-2.  **STEP: Success Model Definition (Benchmarking Best Efficiency)**
-    *   **ENGLISH QUESTION**: "For the prefecture identified in Step 1, find the single facility within that prefecture's **most successful `subsector`** (the one contributing most to the prefectural reduction) that has the **lowest 2025 `emissionsFactor`**. This facility sets the 'Efficiency Target Benchmark'."
-    *   **日本語 (ユーザーの質問)**: 「ステップ1で特定した都道府県の中で、その都道府県の**最も削減に貢献したサブセクター**を特定してください。そのサブセクターにおいて、2025年の`emissionsFactor`が最も低かった施設を見つけてください。これが『効率性目標ベンチマーク』です。」
+2.  **STEP: Success Model Definition (Benchmarking Best Efficiency & Utilization)**
+    *   **ENGLISH QUESTION**: "For the prefecture identified in Step 1, find the single facility within that prefecture's **most successful `subsector`**. This facility must have a **2025 `capacityFactor` greater than 0.7 (highly utilized)** AND the lowest 2025 `emissionsFactor` within that subsector. This sets the 'Premium Efficiency Benchmark'."
+    *   **日本語 (ユーザーの質問)**: 「ステップ1で特定した都道府県の中で、その都道府県の**最も削減に貢献したサブセクター**を特定してください。そのサブセクター内の施設のうち、**2025年の設備利用率（`capacityFactor`）が0.7を超え**、かつ`emissionsFactor`が最も低かった単一施設を見つけてください。これが『効率性目標ベンチマーク』です。」
 
 3.  **STEP**: Identifying Target Facility (Worst Performer in the Same Sector/Region)
     *   **ENGLISH QUESTION**: "Now, focus on the **same `subsector`** identified in Step 2. Identify the single facility **within that same prefecture** (from Step 1) that had the **highest 2025 `emissionsQuantity`** for that subsector. This facility is the primary target for immediate best-practice transfer."
