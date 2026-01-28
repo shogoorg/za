@@ -2,121 +2,118 @@ import requests
 import pandas as pd
 import time
 import os
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 # --- Configuration ---
+# Set the parent GADM ID (Level 0 to get Level 1, or Level 1 to get Level 2)
+TARGET_GADM_ID = "JPN" 
+
 BASE_URL = "https://api.climatetrace.org/v7/sources"
-ADMIN_URL = "https://api.climatetrace.org/v7/admins/JPN/subdivisions"
+# Dynamic URL based on the TARGET_GADM_ID
+ADMIN_URL = f"https://api.climatetrace.org/v7/admins/{TARGET_GADM_ID}/subdivisions"
+
 DATA_DIR = "data"
 EMISSIONS_FILE = os.path.join(DATA_DIR, "sources.csv")
 ADMIN_FILE = os.path.join(DATA_DIR, "admins.csv")
 
 YEARS = [2024, 2025]
 LIMIT = 100
-MAX_RECORDS = 1000
+MAX_RECORDS = 100
 
-# Strict column order as specified
+# Strict column order (No ingested_at)
 COLUMN_ORDER = [
     "id", "name", "sector", "subsector", "country", "assetType", "sourceType",
     "longitude", "latitude", "srid", "gas", "emissionsQuantity",
     "emissionsFactor", "emissionsFactorUnits", "activity", "activityUnits",
-    "capacity", "capacityUnits", "capacityFactor", "year"
+    "capacity", "capacityUnits", "capacityFactor", "year", "gadm_id"
 ]
 
-# HTTP headers to prevent blocking
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
-}
+HEADERS = {"User-Agent": "Mozilla/5.0"}
 
-def fetch_emission_data():
-    all_results = []
+# Session setup with retry strategy
+session = requests.Session()
+retries = Retry(total=5, backoff_factor=2, status_forcelist=[500, 502, 503, 504])
+session.mount("https://", HTTPAdapter(max_retries=retries))
 
+def fetch_and_save_region(gadm_id, filepath, is_start_of_file):
+    """Fetch emission data for a specific GADM ID and append to CSV"""
+    data_written = False
     for year in YEARS:
-        print(f"--- Fetching Year: {year} ---")
+        print(f"   - Processing {gadm_id} for {year}...")
         offset = 0
-        
         while offset < MAX_RECORDS:
-            params = {
-                "year": year,
-                "gas": "co2e_100yr",
-                "gadmId": "JPN",
-                "limit": LIMIT,
-                "offset": offset
-            }
-            
+            params = {"year": year, "gas": "co2e_100yr", "gadmId": gadm_id, "limit": LIMIT, "offset": offset}
             try:
-                response = requests.get(BASE_URL, params=params, headers=HEADERS, timeout=30)
-                
-                if response.status_code != 200:
-                    print(f"   Error: API returned status {response.status_code}")
-                    break
-                
+                response = session.get(BASE_URL, params=params, headers=HEADERS, timeout=30)
+                if response.status_code != 200: break
                 data = response.json()
-                if not data or len(data) == 0:
-                    print(f"   No more data found for {year}.")
-                    break
-                
-                # 1. Convert JSON to DataFrame and flatten nested 'centroid'
-                df_batch = pd.json_normalize(data)
-                
-                # 2. Map the flattened centroid names to your specified names
-                rename_map = {
-                    "centroid.longitude": "longitude",
-                    "centroid.latitude": "latitude",
+                if not data: break
+
+                df = pd.json_normalize(data)
+                df = df.rename(columns={
+                    "centroid.longitude": "longitude", 
+                    "centroid.latitude": "latitude", 
                     "centroid.srid": "srid"
-                }
-                df_batch = df_batch.rename(columns=rename_map)
+                })
+                df.insert(len(df.columns), "gadm_id", gadm_id)
+                df = df.reindex(columns=COLUMN_ORDER)
 
-                # 3. Ensure all specified columns exist and follow the exact order
-                # Missing columns will be filled with NaN (None)
-                df_batch = df_batch.reindex(columns=COLUMN_ORDER)
+                # Overwrite on the very first batch of the whole process, then append
+                mode = 'w' if (is_start_of_file and not data_written) else 'a'
+                header = (is_start_of_file and not data_written)
+                df.to_csv(filepath, index=False, mode=mode, header=header, encoding='utf-8')
                 
-                all_results.append(df_batch)
-                print(f"   Offset {offset}: Retrieved {len(df_batch)} records.")
-                
+                data_written = True
+                if len(data) < LIMIT: break
                 offset += LIMIT
-                time.sleep(1.5) # Sleep to avoid rate limiting
-                
+                time.sleep(1.2)
             except Exception as e:
-                print(f"   Exception during fetch: {e}")
+                print(f"      [Warning] Skipping batch for {gadm_id}: {e}")
                 break
-        
-        time.sleep(2) # Interval between years
-
-    if all_results:
-        # Combine all batches into one DataFrame
-        return pd.concat(all_results, ignore_index=True)
-    return pd.DataFrame()
+    return data_written
 
 def main():
-    # Create directory if it doesn't exist
+    # Setup directory
     os.makedirs(DATA_DIR, exist_ok=True)
+    print(f"--- Starting Extraction for Subdivisions of: {TARGET_GADM_ID} ---")
 
-    # --- Part 1: Sources ---
-    df_sources = fetch_emission_data()
-    
-    if not df_sources.empty:
-        # Save to CSV using the exact specified columns
-        df_sources.to_csv(EMISSIONS_FILE, index=False, columns=COLUMN_ORDER, encoding='utf-8')
-        print(f"\nSuccess! {EMISSIONS_FILE} saved with {len(df_sources)} records.")
-    else:
-        print("\nError: No emission data found.")
-
-    # --- Part 2: Administrative Areas ---
-    print("\n--- Fetching Administrative Areas ---")
+    # --- Step 1: Fetch Subdivision List ---
+    # If TARGET_GADM_ID is Level 0, this gets Level 1. If Level 1, gets Level 2.
+    print(f">>> Step 1: Fetching subdivisions from {ADMIN_URL}")
+    gadm_list = []
     try:
-        admin_response = requests.get(ADMIN_URL, headers=HEADERS, timeout=30)
-        if admin_response.status_code == 200:
-            admin_data = admin_response.json()
+        admin_res = session.get(ADMIN_URL, headers=HEADERS, timeout=30)
+        if admin_res.status_code == 200:
+            admin_data = admin_res.json()
+            if not admin_data:
+                print(f"No subdivisions found for {TARGET_GADM_ID}.")
+                return
+            
             df_admin = pd.DataFrame(admin_data)
+            df_admin.to_csv(ADMIN_FILE, index=False)
             
-            # Specify column order for admins.csv as well
-            admin_cols = ["id", "name", "full_name", "level", "level_0_id", "level_1_id", "level_2_id"]
-            df_admin = df_admin.reindex(columns=admin_cols)
-            
-            df_admin.to_csv(ADMIN_FILE, index=False, encoding='utf-8')
-            print(f"Success! {ADMIN_FILE} saved.")
+            # Extract the list of sub-region IDs
+            gadm_list = df_admin["id"].tolist()
+            print(f"   Successfully retrieved {len(gadm_list)} sub-regions.")
+        else:
+            print(f"API Error: {admin_res.status_code}")
+            return
     except Exception as e:
-        print(f"Error fetching admin areas: {e}")
+        print(f"Critical Error: Could not retrieve subdivision list: {e}")
+        return
+
+    # --- Step 2: Process Sub-regions Sequentially ---
+    print(f"\n>>> Step 2: Processing {len(gadm_list)} regions...")
+    for index, gid in enumerate(gadm_list):
+        # The very first region in the list will trigger 'w' (overwrite) mode
+        is_start = (index == 0)
+        fetch_and_save_region(gid, EMISSIONS_FILE, is_start_of_file=is_start)
+        time.sleep(0.5)
+
+    print(f"\n--- Process Complete ---")
+    print(f"Sub-regions processed: {len(gadm_list)}")
+    print(f"Files saved in: {DATA_DIR}/")
 
 if __name__ == "__main__":
     main()
