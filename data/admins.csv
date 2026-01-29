@@ -46,3 +46,107 @@ JPN.44_1,Wakayama Prefecture,"Wakayama Prefecture, JPN",1,JPN,JPN.44_1,
 JPN.45_1,Yamagata Prefecture,"Yamagata Prefecture, JPN",1,JPN,JPN.45_1,
 JPN.46_1,Yamaguchi Prefecture,"Yamaguchi Prefecture, JPN",1,JPN,JPN.46_1,
 JPN.47_1,Yamanashi Prefecture,"Yamanashi Prefecture, JPN",1,JPN,JPN.47_1,
+JPN.1_1,Aichi Prefecture,"Aichi Prefecture, JPN",1,JPN,JPN.1_1,
+JPN.2_1,Akita Prefecture,"Akita Prefecture, JPN",1,JPN,JPN.2_1,
+JPN.3_1,Aomori Prefecture,"Aomori Prefecture, JPN",1,JPN,JPN.3_1,
+JPN.4_1,Chiba Prefecture,"Chiba Prefecture, JPN",1,JPN,JPN.4_1,
+JPN.5_1,Ehime Prefecture,"Ehime Prefecture, JPN",1,JPN,JPN.5_1,
+JPN.6_1,Fukui Prefecture,"Fukui Prefecture, JPN",1,JPN,JPN.6_1,
+JPN.7_1,Fukuoka Prefecture,"Fukuoka Prefecture, JPN",1,JPN,JPN.7_1,
+JPN.8_1,Fukushima Prefecture,"Fukushima Prefecture, JPN",1,JPN,JPN.8_1,
+JPN.9_1,Gifu Prefecture,"Gifu Prefecture, JPN",1,JPN,JPN.9_1,
+JPN.10_1,Gunma Prefecture,"Gunma Prefecture, JPN",1,JPN,JPN.10_1,
+JPN.11_1,Hiroshima Prefecture,"Hiroshima Prefecture, JPN",1,JPN,JPN.11_1,
+JPN.12_1,Hokkaido Circuit,"Hokkaido Circuit, JPN",1,JPN,JPN.12_1,
+JPN.13_1,Hyōgo Prefecture,"Hyōgo Prefecture, JPN",1,JPN,JPN.13_1,
+JPN.14_1,Ibaraki Prefecture,"Ibaraki Prefecture, JPN",1,JPN,JPN.14_1,
+JPN.15_1,Ishikawa Prefecture,"Ishikawa Prefecture, JPN",1,JPN,JPN.15_1,
+JPN.16_1,Iwate Prefecture,"Iwate Prefecture, JPN",1,JPN,JPN.16_1,
+JPN.17_1,Kagawa Prefecture,"Kagawa Prefecture, JPN",1,JPN,JPN.17_1,
+JPN.18_1,Kagoshima Prefecture,"Kagoshima Prefecture, JPN",1,JPN,JPN.18_1,
+JPN.19_1,Kanagawa Prefecture,"Kanagawa Prefecture, JPN",1,JPN,JPN.19_1,
+JPN.20_1,Kochi Prefecture,"Kochi Prefecture, JPN",1,JPN,JPN.20_1,
+JPN.21_1,Kumamoto Prefecture,"Kumamoto Prefecture, JPN",1,JPN,JPN.21_1,
+JPN.22_1,Kyoto Urban Prefecture,"Kyoto Urban Prefecture, JPN",1,JPN,JPN.22_1,
+JPN.23_1,Mie Prefecture,"Mie Prefecture, JPN",1,JPN,JPN.23_1,
+JPN.24_1,Miyagi Prefecture,"Miyagi Prefecture, JPN",1,JPN,JPN.24_1,
+JPN.25_1,Miyazaki Prefecture,"Miyazaki Prefecture, JPN",1,JPN,JPN.25_1,
+JPN.26_1,Nagano Prefecture,"Nagano Prefecture, JPN",1,JPN,JPN.26_1,
+JPN.27_1,Naoasaki Prefecture,"Naoasaki Prefecture, JPN",1,JPN,JPN.27_1,
+JPN.28_1,Nara Prefecture,"Nara Prefecture, JPN",1,JPN,JPN.28_1,
+JPN.29_1,Niigata Prefecture,"Niigata Prefecture, JPN",1,JPN,JPN.29_1,
+JPN.30_1,Oita Prefecture,"Oita Prefecture, JPN",1,JPN,JPN.30_1,
+JPN.31_1,Okayama Prefecture,"Okayama Prefecture, JPN",1,JPN,JPN.31_1,
+JPN.32_1,Okinawa Prefecture,"Okinawa Prefecture, JPN",1,JPN,JPN.32_1,
+JPN.33_1,Osaka Urban Prefecture,"Osaka Urban Prefecture, JPN",1,JPN,JPN.33_1,
+JPN.34_1,Saga Prefecture,"Saga Prefecture, JPN",1,JPN,JPN.34_1,
+JPN.35_1,Saitama Prefecture,"Saitama Prefecture, JPN",1,JPN,JPN.35_1,
+JPN.36_1,Shiga Prefecture,"Shiga Prefecture, JPN",1,JPN,JPN.36_1,
+JPN.37_1,Shimane Prefecture,"Shimane Prefecture, JPN",1,JPN,JPN.37_1,
+JPN.38_1,Shizuoka Prefecture,"Shizuoka Prefecture, JPN",1,JPN,JPN.38_1,
+JPN.39_1,Tochigi Prefecture,"Tochigi Prefecture, JPN",1,JPN,JPN.39_1,
+JPN.40_1,Tokushima Prefecture,"Tokushima Prefecture, JPN",1,JPN,JPN.40_1,
+JPN.41_1,Tokyo Metropolis,"Tokyo Metropolis, JPN",1,JPN,JPN.41_1,
+JPN.42_1,Tottori Prefecture,"Tottori Prefecture, JPN",1,JPN,JPN.42_1,
+JPN.43_1,Toyama Prefecture,"Toyama Prefecture, JPN",1,JPN,JPN.43_1,
+JPN.44_1,Wakayama Prefecture,"Wakayama Prefecture, JPN",1,JPN,JPN.44_1,
+JPN.45_1,Yamagata Prefecture,"Yamagata Prefecture, JPN",1,JPN,JPN.45_1,
+JPN.46_1,Yamaguchi Prefecture,"Yamaguchi Prefecture, JPN",1,JPN,JPN.46_1,
+JPN.47_1,Yamanashi Prefecture,"Yamanashi Prefecture, JPN",1,JPN,JPN.47_1,
+JPN.41.1_1,Adachi Special Ward,"Adachi Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.1_1
+JPN.41.2_1,Akiruno City,"Akiruno City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.2_1
+JPN.41.3_1,Akishima City,"Akishima City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.3_1
+JPN.41.4_1,Arakawa Special Ward,"Arakawa Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.4_1
+JPN.41.5_1,Bunkyō Special Ward,"Bunkyō Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.5_1
+JPN.41.6_1,Chiyoda Special Ward,"Chiyoda Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.6_1
+JPN.41.7_1,Chōfu City,"Chōfu City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.7_1
+JPN.41.8_1,Chūō Special Ward,"Chūō Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.8_1
+JPN.41.9_1,Edogawa Special Ward,"Edogawa Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.9_1
+JPN.41.10_1,Fuchū City,"Fuchū City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.10_1
+JPN.41.11_1,Fussa City,"Fussa City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.11_1
+JPN.41.57_1,Hachijō Subprefecture,"Hachijō Subprefecture, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.57_1
+JPN.41.12_1,Hachiōji City,"Hachiōji City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.12_1
+JPN.41.13_1,Hamura City,"Hamura City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.13_1
+JPN.41.14_1,Higashikurume City,"Higashikurume City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.14_1
+JPN.41.15_1,Higashimurayama City,"Higashimurayama City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.15_1
+JPN.41.16_1,Higashiyamato City,"Higashiyamato City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.16_1
+JPN.41.17_1,Hino City,"Hino City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.17_1
+JPN.41.18_1,Hinode Town,"Hinode Town, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.18_1
+JPN.41.19_1,Hinohara Town,"Hinohara Town, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.19_1
+JPN.41.20_1,Inagi City,"Inagi City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.20_1
+JPN.41.21_1,Itabashi Special Ward,"Itabashi Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.21_1
+JPN.41.22_1,Katsushika Special Ward,"Katsushika Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.22_1
+JPN.41.23_1,Kita Special Ward,"Kita Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.23_1
+JPN.41.24_1,Kiyose City,"Kiyose City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.24_1
+JPN.41.25_1,Kodaira City,"Kodaira City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.25_1
+JPN.41.26_1,Koganei City,"Koganei City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.26_1
+JPN.41.27_1,Kokubunji City,"Kokubunji City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.27_1
+JPN.41.28_1,Komae City,"Komae City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.28_1
+JPN.41.29_1,Kōtō Special Ward,"Kōtō Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.29_1
+JPN.41.30_1,Kunitachi City,"Kunitachi City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.30_1
+JPN.41.31_1,Machida City,"Machida City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.31_1
+JPN.41.32_1,Meguro Special Ward,"Meguro Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.32_1
+JPN.41.33_1,Minato Special Ward,"Minato Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.33_1
+JPN.41.34_1,Mitaka City,"Mitaka City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.34_1
+JPN.41.56_1,Miyake Subprefecture,"Miyake Subprefecture, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.56_1
+JPN.41.35_1,Mizuho Town,"Mizuho Town, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.35_1
+JPN.41.36_1,Musashimurayama City,"Musashimurayama City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.36_1
+JPN.41.37_1,Musashino City,"Musashino City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.37_1
+JPN.41.38_1,Nakano Special Ward,"Nakano Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.38_1
+JPN.41.39_1,Nerima Special Ward,"Nerima Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.39_1
+JPN.41.40_1,Nishitōkyō City,"Nishitōkyō City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.40_1
+JPN.41.54_1,Ogasawara Subprefecture,"Ogasawara Subprefecture, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.54_1
+JPN.41.41_1,Okutama Town,"Okutama Town, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.41_1
+JPN.41.42_1,Ōme City,"Ōme City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.42_1
+JPN.41.55_1,Ōshima Subprefecture,"Ōshima Subprefecture, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.55_1
+JPN.41.43_1,Ōta Special Ward,"Ōta Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.43_1
+JPN.41.44_1,Setagaya Special Ward,"Setagaya Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.44_1
+JPN.41.45_1,Shibuya Special Ward,"Shibuya Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.45_1
+JPN.41.46_1,Shinagawa Special Ward,"Shinagawa Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.46_1
+JPN.41.47_1,Shinjuku Special Ward,"Shinjuku Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.47_1
+JPN.41.48_1,Suginami Special Ward,"Suginami Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.48_1
+JPN.41.49_1,Sumida Special Ward,"Sumida Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.49_1
+JPN.41.50_1,Tachikawa City,"Tachikawa City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.50_1
+JPN.41.51_1,Taitō Special Ward,"Taitō Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.51_1
+JPN.41.52_1,Tama City,"Tama City, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.52_1
+JPN.41.53_1,Toshima Special Ward,"Toshima Special Ward, Tokyo Metropolis, JPN",2,JPN,JPN.41_1,JPN.41.53_1
