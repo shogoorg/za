@@ -84,6 +84,49 @@ cd adk_agent/
 # Run the ADK web interface
 adk web
 ```
+## 5. Deployment Guide(AP2)
+```bash
+gcloud auth application-default login
+gcloud config set project [YOUR-PROJECT-ID]
+export PROJECT_ID=$(gcloud config get project)
+```
+```bash
+gcloud services enable cloudresourcemanager.googleapis.com \
+                       servicenetworking.googleapis.com \
+                       run.googleapis.com \
+                       cloudbuild.googleapis.com \
+                       artifactregistry.googleapis.com \
+                       aiplatform.googleapis.com \
+                       compute.googleapis.com
+```
+```bash
+echo "GOOGLE_GENAI_USE_VERTEXAI=TRUE" >> .env \
+&& echo "GOOGLE_CLOUD_PROJECT=$PROJECT_ID" >> .env \
+&& echo "GOOGLE_CLOUD_LOCATION=us-central1" >> .env
+```
+MCP Server
+```bash
+python3 server/server.py
+python3 server/test_server.py
+#http://localhost:8080
+```
+Client
+```bash
+cd adk_agent/
+adk web
+```
+A2A Server 
+```bash
+python3 server/server.py
+cd adk_agent/
+python3 -m uvicorn currency_agent.agent:a2a_app --host localhost --port 10000
+#http://localhost:10000
+#http://localhost:10000/.well-known/agent.json
+```
+A2A Client
+```bash
+python3 currency_agent/test_client.py
+```
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 
 *   **PURPOSE**: Develop a precise reduction strategy by benchmarking against the most efficient, *highly utilized* facility within a successful region and forecasting the potential impact if this efficiency is applied to the worst performer in the same region.
