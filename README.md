@@ -155,13 +155,14 @@ uv sync
 cp -r ~/GitHub/a2a-x402/python/examples/ap2-demo/.venv/lib/python3.13/site-packages/x402 ~/GitHub/za/.venv/lib/python3.14/site-packages/
 ```
 ```bash
-GOOGLE_API_KEY=<Your API KEY>
+GOOGLE_API_KEY="<Your API KEY>"
 ```
 ```bash
 source .venv/bin/activate
 uv run server
 ```
 ```bash
+cd adk_agent
 source .venv/bin/activate
 uv run adk web --port=8000
 ```
