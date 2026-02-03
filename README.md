@@ -138,6 +138,34 @@ A2A Client
 ```bash
 python3 currency_agent/test_client.py
 ```
+## 5. Deployment Guide(AP2x402)
+
+```bash
+git clone https://github.com/google-agentic-commerce/a2a-x402.git
+```
+
+```bash
+git clone https://github.com/shogoorg/za.git
+cd za
+uv venv --python 3.13
+source .venv/bin/activate
+uv sync
+```
+```bash
+cp -r ~/GitHub/a2a-x402/python/examples/ap2-demo/.venv/lib/python3.13/site-packages/x402 ~/GitHub/za/.venv/lib/python3.14/site-packages/
+```
+```bash
+GOOGLE_API_KEY=<Your API KEY>
+```
+```bash
+source .venv/bin/activate
+uv run server
+```
+```bash
+source .venv/bin/activate
+uv run adk web --port=8000
+```
+
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 
 1. 「東京都の非住宅の排出削減を計画しています。2025年に排出削減している３つの区市町村を特定してください。」
