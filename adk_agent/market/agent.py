@@ -14,9 +14,9 @@
 import httpx
 
 # Local imports
-from client_agent._task_store import TaskStore
-from client_agent.client_agent import ClientAgent
-from client_agent.wallet import MockLocalWallet
+from market._task_store import TaskStore
+from market.client_agent import ClientAgent
+from market.wallet import MockLocalWallet
 
 root_agent = ClientAgent(
     remote_agent_addresses=[
