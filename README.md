@@ -19,30 +19,31 @@ AIエージェントが、**「排出アセット（BigQuery）」**と**「地�
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/shogoorg/za.git
-cd za
-
-# Create virtual environment
-python3 -m venv .venv
-
-# If the above fails, you may need to install python3-venv:
-# apt update && apt install python3-venv
-
-# Activate virtual environment
-source .venv/bin/activate
-
-pip install -r requirements.txt
-
-# Install ADK
-pip install google-adk
-
 ```
+
+```bash
+git clone https://github.com/google-agentic-commerce/a2a-x402.git
+```
+
+```bash
+cd za
+uv venv --python 3.13
+source .venv/bin/activate
+uv sync
+uv pip install -r requirements.txt
+uv pip install google-adk
+```
+
+```bash
+cp -r ~/GitHub/a2a-x402/python/examples/ap2-demo/.venv/lib/python3.13/site-packages/x402 ~/GitHub/za/.venv/lib/python3.13/site-packages/
+```
+
 ### 2. Authenticate with Google Cloud
 
 ```bash
 gcloud auth application-default login
 gcloud config set project [YOUR-PROJECT-ID]
 export PROJECT_ID=$(gcloud config get project)
-
 ```
 
 ### 3. Configure Environment
@@ -54,7 +55,6 @@ gcloud services enable \
   apikeys.googleapis.com \
   mapstools.googleapis.com \
   cloudresourcemanager.googleapis.com
-
 gcloud beta services mcp enable mapstools.googleapis.com --project=$PROJECT_ID
 gcloud beta services mcp enable bigquery.googleapis.com --project=$PROJECT_ID
 ```
@@ -87,42 +87,17 @@ chmod +x setup/setup_bigquery.sh
 ## 5. Deployment Guide
 
 ```bash
-
-# Navigate to the app directory
-cd adk_agent/
-
-# Run the ADK web interface
-adk web
-```
-
-## 5. Deployment Guide(AP2x402)
-
-```bash
-git clone https://github.com/google-agentic-commerce/a2a-x402.git
-```
-
-```bash
-git clone https://github.com/shogoorg/za.git
-cd za
-uv venv --python 3.13
-source .venv/bin/activate
-uv sync
-uv pip install -r requirements.txt
-uv pip install google-adk
-```
-```bash
-cp -r ~/GitHub/a2a-x402/python/examples/ap2-demo/.venv/lib/python3.13/site-packages/x402 ~/GitHub/za/.venv/lib/python3.13/site-packages/
-```
-
-```bash
 export GOOGLE_API_KEY="<Your API KEY>"
 source .venv/bin/activate
 uv run server
 ```
+
+あたらしいターミナル
+
 ```bash
-cd adk_agent
 export GOOGLE_API_KEY="<Your API KEY>"
 source .venv/bin/activate
+cd adk_agent
 uv run adk web --port=8000
 ```
 
