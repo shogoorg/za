@@ -1,30 +1,19 @@
 # za
 
-## Prerequisites
-
-*   **Google Cloud Project** 
-*   **Google Cloud Shell** 
-
 ## Deployment Guide
 
-AIエージェントが、**「排出アセット（BigQuery）」**と**「地図情報（Google マップ）」**を駆使し、排出アセットの排出削減と歳出削減をする。
-
-**「私は商人エージェントです。サブセクターと市町村において、排出アセットの排出削減と歳出削減をする」**
-
-エージェントの実行能力（オーケストレーション）
-1.  **分析（BigQuery）**: 過去データからサブセクターと市町村において、排出アセットの排出削減と歳出削減の分析をする。
-2.  **予測（BigQuery）**: 予測データから、排出アセットの排出削減予測と歳出削減予測をする。
-3.  **視覚化（Google マップ）**: 資金調圧する区役所を視覚化する。
+1.  排出量を追跡する: セクター別と行政区画別のアセットの排出量を追跡する。
+2.  排出量を予測する: セクター別と行政区画別のアセットの排出量を予測する。
+3.  排出量削減の推定: セクター別と行政区画別のアセットの排出量削減を推定する。
+4.  排出量削減の購入: セクター別と行政区画別のアセットの排出量削減を購入する。
 
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/shogoorg/za.git
 ```
-
 ```bash
 git clone https://github.com/google-agentic-commerce/a2a-x402.git
 ```
-
 ```bash
 cd za
 uv venv --python 3.13
@@ -91,9 +80,7 @@ export GOOGLE_API_KEY="<Your API KEY>"
 source .venv/bin/activate
 uv run server
 ```
-
-あたらしいターミナル
-
+new Terminal
 ```bash
 export GOOGLE_API_KEY="<Your API KEY>"
 source .venv/bin/activate
@@ -103,14 +90,13 @@ uv run adk web --port=8000
 
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 
-1. 「東京都の非住宅の排出削減を計画しています。2025年に排出削減している３つの区市町村を特定してください。」
-2. 「その区市町村の３つのアセットで、非住宅の排出削減量を確認してもらえますか？」
-3. 「これをプレミアムサブセクターとして位置付けたいと思っています。東京都の非住宅のアセットでどれくらい排出削減していますか？」
-4. 「2026年のカーボンプランニング予測が必要です。その非住宅の区市町村のアセットの2026年のカーボンクレジットを推定します。」
-5. 「それで歳出削減できます。最後に、資金調達を確認しましょう。予定エリアに最も近い市役所を探して確認してください。」
-6. 「非住宅の区市町村のアセットのカーボンクレジットを買いたい。」
-7. 「はい」
-
+1. 東京都の排出量を追跡したい。
+2. residential-onsite-fuel-usage（住宅用オンサイト燃料使用）の排出量を追跡したい。
+3. 東京都の排出量を予測したい。
+4. 家庭部門（燃料燃焼）の排出量を予測したい
+5. 東京都の排出量削減を推定したい。
+6. residential-onsite-fuel-usage（住宅用オンサイト燃料使用）の排出削減を推定したい。
+7. 東京都のresidential-onsite-fuel-usage（住宅用オンサイト燃料使用）のカーボンクレジットを購入したい。
 
 ### 7. Cleanup
 ```bash
@@ -118,12 +104,9 @@ dos2unix cleanup/cleanup_env.sh
 chmod +x cleanup/cleanup_env.sh
 ./cleanup/cleanup_env.sh
 ```
-
 ### Data Logic & Narratives
-
-### Data Logic & Narratives （最終構成）
-
-| Table | 役割 (Demo Purpose) | Narrative Logic |
-| :--- | :--- | :--- |
-| **sources_agent** | **過去実績の分析＆ベンチマーク** | **2021年から2025年までの年次実績データ**を格納。このテーブルにより、エージェントは過去の削減トレンド、最も効率の良い地域（ベンチマーク）、および **2025年の確定収益（605万円）** を正確に分析・確定させることができます。 |
-| **sources_prediction_agent** | **未来予測の戦略＆収益確定** | **2026年の予測データのみ**を格納。このテーブルは、エージェントが「過去の延長線上」として予測排出量、予測削減トン数、および **予測クレジット価値（200万円）** を提示し、「未来の収益目標」と「中期事業計画の収益性」を議論する基盤となります。 |
+| Table | 役割 (Demo Purpose) |
+| :--- | :--- | 
+| **sources** | Table containing the emissions data at the emissions source level across all subsectors monitored by Climate TRACE. |
+| **prediction** | Table containing the emissions prediction data at the emissions source level across all subsectors monitored by Climate TRACE. |
+| **plans** | Table containing the emission reduction solutions for all subsectors globally|
