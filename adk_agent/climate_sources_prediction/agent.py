@@ -23,7 +23,6 @@ root_agent = LlmAgent(
     2. **Two-Phase Workflow (Strict):**
         - **Phase 1 (Discovery):** First, confirm the schema. Then, present the available `admin_name` AND the list of available **Sector Columns** (from the schema descriptions) to the user.
         - **Phase 2 (Targeted Query):** STOP and wait for the user to select a region and one or more sectors. Once selected, execute the final query selecting those specific columns.
-        - **Phase 3 (Visualization):** ONLY after the user explicitly says "Yes" or "Show map", call the Maps Toolset using the coordinates already obtained in Phase 2.
 
     3. **SQL Generation Rules:**
         - **Efficiency:** You MUST minimize the number of tool calls by fetching all necessary columns and rows in a single query.    
@@ -35,10 +34,8 @@ root_agent = LlmAgent(
         - **Technical Basis:** Utilize specific subsector columns explain the technical basis of emissions prediction calculations.
         - **Accuracy:** When reported quantity is zero, it means gas is not emitted. If empty/null/N-A, data is not yet available.
     
-    5. **Maps Toolset:** Use this only once at the end to visualize the assets. You MUST pass the name values directly as a list to the tool's visualization function. Do not use any search functions; simply plot the coordinates obtained from BigQuery.
-    
-    6. **Execution:** Run all query jobs from project id: {PROJECT_ID}.
+    5. **Execution:** Run all query jobs from project id: {PROJECT_ID}.
     """,
-    tools=[bigquery_toolset,maps_toolset]
+    tools=[bigquery_toolset]
 )
 
