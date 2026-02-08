@@ -91,12 +91,14 @@ uv run adk web --port=8000
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 
 1. 東京都の排出量を追跡したい。
-2. residential-onsite-fuel-usage（住宅用オンサイト燃料使用）の排出量を追跡したい。
+2. electricity-generation（発電）の排出量を追跡したい。地図を表示して。
 3. 東京都の排出量を予測したい。
-4. 家庭部門（燃料燃焼）の排出量を予測したい
+4. electricity (電力)の排出量を予測したい。
 5. 東京都の排出量削減を推定したい。
-6. residential-onsite-fuel-usage（住宅用オンサイト燃料使用）の排出削減を推定したい。
-7. 東京都のresidential-onsite-fuel-usage（住宅用オンサイト燃料使用）のカーボンクレジットを購入したい。
+6. electricity-generation（発電）の排出削減を推定したい。地図を表示して。
+7. 東京都のelectricity-generation（発電）のカーボンクレジットを購入したい。
+
+
 
 ### 7. Cleanup
 ```bash
