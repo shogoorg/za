@@ -3,9 +3,8 @@
 ## Deployment Guide
 
 1.  排出量を追跡する: セクター別と行政区画別のアセットの排出量を追跡する。
-2.  排出量を予測する: セクター別と行政区画別のアセットの排出量を予測する。
-3.  排出量削減の推定: セクター別と行政区画別のアセットの排出量削減を推定する。
-4.  排出量削減の購入: セクター別と行政区画別のアセットの排出量削減を購入する。
+2.  排出量削減の推定: セクター別と行政区画別のアセットの排出量削減を推定する。
+3.  排出量削減の購入: セクター別と行政区画別のアセットの排出量削減を購入する。
 
 ### 1. Clone the Repository
 ```bash
@@ -82,8 +81,6 @@ uv run server
 ```
 new Terminal
 ```bash
-export GOOGLE_API_KEY="<Your API KEY>"
-source .venv/bin/activate
 cd adk_agent
 uv run adk web --port=8000
 ```
@@ -92,13 +89,9 @@ uv run adk web --port=8000
 
 1. 東京都の排出量を追跡したい。
 2. electricity-generation（発電）の排出量を追跡したい。地図を表示して。
-3. 東京都の排出量を予測したい。
-4. electricity (電力)の排出量を予測したい。
-5. 東京都の排出量削減を推定したい。
-6. electricity-generation（発電）の排出削減を推定したい。地図を表示して。
-7. 東京都のelectricity-generation（発電）のカーボンクレジットを購入したい。
-
-
+3. 東京都の排出量削減を推定したい。
+4. electricity-generation（発電）の排出削減を推定したい。地図を表示して。
+5. 東京都のelectricity-generation（発電）のカーボンクレジットを購入したい。
 
 ### 7. Cleanup
 ```bash
@@ -107,8 +100,8 @@ chmod +x cleanup/cleanup_env.sh
 ./cleanup/cleanup_env.sh
 ```
 ### Data Logic & Narratives
-| Table | 役割 (Demo Purpose) |
+| Table | Demo Purpose |
 | :--- | :--- | 
 | **sources** | Table containing the emissions data at the emissions source level across all subsectors monitored by Climate TRACE. |
-| **prediction** | Table containing the emissions prediction data at the emissions source level across all subsectors monitored by Climate TRACE. |
+subsectors monitored by Climate TRACE. |
 | **plans** | Table containing the emission reduction solutions for all subsectors globally|
