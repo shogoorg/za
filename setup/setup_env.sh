@@ -50,14 +50,17 @@ fi
 
 # Create .env file
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ENV_FILE="$SCRIPT_DIR/../adk_agent/za/.env"
-mkdir -p $(dirname "$ENV_FILE")
+TARGET_DIRS=("climate_plans" "climate_sources" "market")
 
-cat <<EOF > "$ENV_FILE"
+for DIR in "${TARGET_DIRS[@]}"; do
+    ENV_FILE="$SCRIPT_DIR/../adk_agent/$DIR/.env"
+    mkdir -p $(dirname "$ENV_FILE")
+    cat <<EOF > "$ENV_FILE"
 GOOGLE_GENAI_USE_VERTEXAI=1
 GOOGLE_CLOUD_PROJECT=$PROJECT_ID
 GOOGLE_CLOUD_LOCATION=global
 MAPS_API_KEY=$API_KEY
 EOF
+done
 
 echo "Successfully updated $ENV_FILE"
