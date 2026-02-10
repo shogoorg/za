@@ -8,7 +8,13 @@
 PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
 DATASET_NAME="za"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ENV_FILE="$SCRIPT_DIR/../adk_agent/za_app/.env"
+
+# --- 修正箇所: 削除対象の相対パスを配列で定義 ---
+ENV_PATHS=(
+    "../adk_agent/climate_plans/.env"
+    "../adk_agent/climate_sources/.env"
+    "../adk_agent/market/.env"
+)
 
 if [ -z "$PROJECT_ID" ]; then
     echo "Error: Could not determine Google Cloud Project ID."
@@ -28,7 +34,7 @@ echo "----------------------------------------------------------------"
 echo "Project:   $PROJECT_ID"
 echo "Dataset:   $DATASET_NAME"
 echo "Bucket:    $BUCKET_NAME"
-echo "Local Env: $ENV_FILE"
+echo "Local Env: $ENV_PATHS"
 echo "API Keys:  Keys named 'za-key-*'"
 echo "----------------------------------------------------------------"
 echo "WARNING: This will permanently delete the dataset, bucket, and API keys."
@@ -82,12 +88,16 @@ fi
 # Phase 3: Local Config
 # ------------------------------------------
 echo "[4/5] Removing local configuration..."
-if [ -f "$ENV_FILE" ]; then
-    rm "$ENV_FILE"
-    echo "      Deleted $ENV_FILE"
-else
-    echo "      .env file not found. Skipping."
-fi
+
+for REL_PATH in "${ENV_PATHS[@]}"; do
+    TARGET_FILE="$SCRIPT_DIR/$REL_PATH"
+    if [ -f "$TARGET_FILE" ]; then
+        rm "$TARGET_FILE"
+        echo "      Deleted $TARGET_FILE"
+    else
+        echo "      File not found: $REL_PATH. Skipping."
+    fi
+done
 
 # ------------------------------------------
 # Phase 4: Disable APIs (Optional)
