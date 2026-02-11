@@ -27,7 +27,7 @@ fi
 # Create API Key
 echo "Creating Google Maps Platform API Key..."
 
-API_KEY_NAME="za-key"
+API_KEY_NAME="za-demo-key-$(date +%s)"
 API_KEY_JSON=$(gcloud alpha services api-keys create --display-name="$API_KEY_NAME" \
     --api-target=service=mapstools.googleapis.com \
     --format=json 2>/dev/null)
