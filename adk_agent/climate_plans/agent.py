@@ -13,30 +13,20 @@ bigquery_toolset = tools.get_bigquery_mcp_toolset()
 root_agent = LlmAgent(
     model='gemini-3-flash-preview',
     name='root_agent',
-    instruction=fr"""
-    Help the user answer questions by following this strict workflow as a trustless agent:
+    instruction=f"""
+        Act as a trustless agent. Always translate Japanese inputs to English use `LIKE` for SQL to handle variations.
 
-    1. **BigQuery Toolset:** Use the following two primary tables for all data operations.
-        - **{PROJECT_ID}.za.plans_agent (Forecast/Strategy Data):** Table containing the emission reduction solutions for all subsectors
-        globally
+        1. **Step 1 (Discovery):** Query `admin_name` and `subsector` from `{PROJECT_ID}.za.source_admin_agent`.
+           STOP and ask the user to choose one subsector. (Do not query other tables).
 
-    2. **Two-Phase Workflow (Strict):**
-        - **Phase 1 (Discovery):** First, confirm the schema. Then, you MUST fetch a unique list of `admin_name` and `subsector` (filtered by the user's requested area/topic if applicable) and present them to the user.
-        - **Phase 2 (Targeted Query):** STOP and wait for the user to select from the list. Once selected, execute the final data query in the next turn using the exact values with `LIKE`.        
-        - **Phase 3 (Visualization):** ONLY after the user explicitly says "Yes" or "Show map", call the Maps Toolset using the coordinates already obtained in Phase 2.
+        2. **Step 2 (Detail):** ONLY after the user chooses, query `name`, `latitude`, `longitude`, `emissionsQuantity`, `strategy_name` and `total_emissions_reduced_per_year` from `{PROJECT_ID}.za.plans_agent`.
+           STOP and present results. ASK the user: "Would you like to see the Map?"
 
-    3. **SQL Generation Rules:**
-        - **Schema Reliance:** When writing SQL, you MUST rely on the precise column names provided in the schema descriptions. Use the exact naming conventions from the table definitions (e.g., `emissionsQuantity`).
-        - **Search Keys:** Filter by `name`, `admin_name`, `subsector` using `LIKE '%keyword%'` for string matching.
-        - **No Guessing:** Do not attempt to guess or map user terms to database values yourself. Always rely on the Phase 1 catalog.
-    4. **Data Interpretation:**
-        - **Technical Basis:** Utilize `emissionsQuantity` and `total_emissions_reduced_per_year` to explain the technical basis of emissions calculations.
-        - **Accuracy:** When reported quantity is zero, it means gas is not emitted. If empty/null/N-A, data is not yet available.
+        3. **Step 3 (Map):** ONLY if the user says "Map" (or "Yes"), call the Maps Toolset using the 'name' values.
+           Include the interactive map link in your response.
 
-    5. **Maps Toolset:** Use this only once at the end to visualize the assets. You MUST pass the name values directly as a list to the tool's visualization function. Do not use any search functions; simply plot the coordinates obtained from BigQuery.
-    
-    6. **Execution:** Run all query jobs from project id: {PROJECT_ID}.
+        Rules:
+        - **Efficiency:** Use LIMIT 50 and Project: {PROJECT_ID}.
     """,
-    tools=[bigquery_toolset,maps_toolset]
+    tools=[maps_toolset, bigquery_toolset]
 )
-
