@@ -1,8 +1,14 @@
 pandas
 numpy
 google-cloud-bigquery
-requests
 a2a-sdk
-fastmcp
-google-genai
-python-dotenv
+google-adk==1.23.0
+# google-adk>=0.5.0
+x402==0.2.0
+click>=8.2.0
+eth-account>=0.13.7
+httpx>=0.28.1
+uvicorn>=0.34.2
+web3>=7.10.0
+cdp-sdk>=1.20.0
+-e ../a2a-x402/python/x402_a2a
