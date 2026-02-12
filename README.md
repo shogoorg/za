@@ -71,6 +71,8 @@ python3 setup/setup_csv.py
 ```
 
 ## 5. Deployment Guide
+
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -80,38 +82,36 @@ pip install google-adk
 cd adk_agent
 adk web
 ```
-Could have
-```bash
-uv venv --python 3.13
-source .venv/bin/activate
-uv sync
-uv pip install -r requirements.txt
-uv pip install google-adk
-```
-```bash
-cp -r ~/GitHub/a2a-x402/python/examples/ap2-demo/.venv/lib/python3.13/site-packages/x402 ~/GitHub/za/.venv/lib/python3.13/site-packages/
-```
+market
 
 ```bash
 export GOOGLE_API_KEY="<Your API KEY>"
 source .venv/bin/activate
-uv run server
+pip uninstall google-adk
+pip install -r requirements.txt
 ```
-new Terminal
 ```bash
-cd adk_agent
-uv run adk web --port=8000
+python -m server
 ```
+```bash
+source .venv/bin/activate
+adk web --port=8000
+```
+
 
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 climate_sources
-1. 東京都の排出量を追跡したい。
-2. electricity-generation（発電）の排出量を追跡したい。
-3. 地図を表示して。
+1. 2025年の東京都の排出量を追跡したい。
+2. electricity-generation（発電）
+3. （地図を表示しますか?）はい
+4. レポートを作成したい。
+
 climate_plans
-3. 東京都の排出量削減を推定したい。
-4. electricity-generation（発電）の排出削減を推定したい。
-5. 地図を表示して。
+1. 東京都の排出量削減を推定したい。
+2. electricity-generation（発電）
+3. （地図を表示しますか?）はい
+4.  レポートを作成したい。
+
 market
 6. 東京都のelectricity-generation（発電）のカーボンクレジットを購入したい。
 
