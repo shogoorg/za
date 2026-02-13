@@ -101,7 +101,7 @@ adk web --port=8000
 
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 climate_sources
-1. 2025年の東京都の排出量を追跡したい。
+1. 東京都の排出量を追跡したい。
 2. electricity-generation（発電）
 3. （地図を表示しますか?）はい
 4. レポートを作成したい。
@@ -113,7 +113,7 @@ climate_plans
 4.  レポートを作成したい。
 
 market
-6. 東京都のelectricity-generation（発電）のカーボンクレジットを購入したい。
+6. 東京都のelectricity-generation（発電）のSHINAGAWAカーボンクレジットを購入したい。
 
 ### 7. Cleanup
 ```bash
