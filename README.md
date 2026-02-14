@@ -9,9 +9,9 @@
 
 ### 利点　
 
-*   世界の排出量を測定: Climate TRACEを利用して、温室効果ガス排出量をこれまでにない詳細さとスピードで追跡するテクノロジーを活用することで、意義のある気候変動対策をより迅速かつ容易に実施できるようにします。世界の排出量ネットゼロ達成を目指すすべての関係者にとって有益な情報を提供します。
+*   世界の排出量を測定: [Climate TRACE](https://climatetrace.org/)を利用して、温室効果ガス排出量をこれまでにない詳細さとスピードで追跡するテクノロジーを活用することで、意義のある気候変動対策をより迅速かつ容易に実施できるようにします。世界の排出量ネットゼロ達成を目指すすべての関係者にとって有益な情報を提供します。
 *   フットプリントの削減: Climate TRACEを利用して、排出量の追跡にとどまらず、管理下にあるあらゆる排出源に対して実行可能な **気候変動アクション**を実行することで、具体的な排出削減目標を達成する方法を示します。
-*   世界の排出量の購入: Climate TRACEを利用して、排出量の追跡にとどまらず、管理下にあるあらゆる排出源に対して実行可能な **気候変動資金**を実行することで、具体的な排出削減目標を達成する方法を示します。
+*   世界の排出量の購入: Climate TRACEを利用して、排出量の追跡にとどまらず、管理下にあるあらゆる排出源に対して実行可能な **気候資金**を実行することで、具体的な排出削減目標を達成する方法を示します。
 
 ### 主な機能
 
@@ -25,10 +25,6 @@ LLM。多言語性と事実性と推論により、世界中の誰もが正確�
 *  多言語性: 英語主体の排出データをLLMが多言語化。世界中の誰もが自国語で環境データにアクセス可能にします。
 *  事実性: 衛星観測による厳密な数値を根拠にLLMが回答。根拠を明示し、嘘のない正確な情報提供を実現します。
 *  推論: 排出量の増減理由をLLMが論理的に分析。単なる数値から、背景にある原因や改善策の洞察を導きます。
-
-
-
-オープンデータ。
 
 ## Deployment Guide
 
@@ -56,9 +52,7 @@ LLM。多言語性と事実性と推論により、世界中の誰もが正確�
 │   ├── setup_csv.sh
 │   └── setup_env.sh
 ```
-
-## DeskTOP
-
+## ローカル
 ### 1. Authenticate with Google Cloud
 ```bash
 gcloud config set project [YOUR-PROJECT-ID]
@@ -105,9 +99,7 @@ source .venv/bin/activate
 cd adk_agent
 adk web --port=8000
 ```
-
 ## GCP
-
 ### 1. Authenticate with Google Cloud
 ```bash
 gcloud auth list
@@ -146,6 +138,7 @@ python3 setup/setup_csv.py
 ```
 ## 5. Deployment Guide
 ```bash
+cd za
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -161,23 +154,28 @@ source .venv/bin/activate
 cd adk_agent
 adk web --port=8000
 ```
-
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
-climate_sources
+排出量を追跡
+climate_sourcesエージェントを選択
 1. 東京都の排出量を追跡したい。
 2. electricity-generation（発電）
 3. （地図を表示しますか?）はい
 4. レポートを作成したい。
+　[排出量を追跡のセッション](https://gist.github.com/shogoorg/c521bcdab975ab5cba26017d2744de63)
 
-climate_plans
-1. 東京都の排出量削減を推定したい。
+排出量削減の推定
+climate_plansエージェントを選択
+1. 東京都の排出量を推定したい。
 2. electricity-generation（発電）
 3. （地図を表示しますか?）はい
-4.  レポートを作成したい。
+4. レポートを作成したい。
+　[排出量削減の推定のセッション](https://gist.github.com/shogoorg/3246a9127a38b61315632aad7b431020)
 
-market
+排出量削減の購入
+marketを選択
 1. 東京都のelectricity-generation（発電）のSHINAGAWAのカーボンクレジットを購入したい。
 2. (この支払いを承認しますか?) はい
+　[排出量削減の購入のセッション](https://gist.github.com/shogoorg/7eef27a8d1dc74bc04d002c1bab41ba5)
 
 ### 7. Cleanup
 ```bash
