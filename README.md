@@ -161,6 +161,7 @@ climate_sourcesエージェントを選択
 2. electricity-generation（発電）
 3. （地図を表示しますか?）はい
 4. レポートを作成したい。
+![Demo Flow](assets/climate_sources.png)
 　[排出量を追跡のセッション](https://gist.github.com/shogoorg/c521bcdab975ab5cba26017d2744de63)
 
 排出量削減の推定
@@ -169,12 +170,14 @@ climate_plansエージェントを選択
 2. electricity-generation（発電）
 3. （地図を表示しますか?）はい
 4. レポートを作成したい。
+![Demo Flow](assets/climate_plans.png)
 　[排出量削減の推定のセッション](https://gist.github.com/shogoorg/3246a9127a38b61315632aad7b431020)
 
 排出量削減の購入
 marketを選択
 1. 東京都のelectricity-generation（発電）のSHINAGAWAのカーボンクレジットを購入したい。
 2. (この支払いを承認しますか?) はい
+![Demo Flow](assets/market.png)
 　[排出量削減の購入のセッション](https://gist.github.com/shogoorg/7eef27a8d1dc74bc04d002c1bab41ba5)
 
 ### 7. Cleanup
@@ -186,5 +189,5 @@ chmod +x cleanup/cleanup_env.sh
 ### Data Logic & Narratives
 | Table | Demo Purpose |
 | :--- | :--- | 
-| **sources** | Table containing the emissions data at the emissions source level across all subsectors monitored by Climate TRACE. |
-| **plans** | Table containing the emission reduction solutions for all subsectors globally|
+| **sources** |Climate TRACE によって監視されているすべてのサブセクターの排出源レベルの排出データを含むテーブル。 |
+| **plans** | 世界のすべてのサブセクターの排出削減ソリューションを示すテーブル|
