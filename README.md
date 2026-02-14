@@ -19,6 +19,14 @@
 *  10の産業セクターを67のサブセクターに分割したグループ排出量
 *  10年以上にわたるデータ（2015～2025年）を追跡し、2021年からは月次データが利用可能。ゼロ会は、1年のデータ（2024年）を追跡。
 *  3つの温室効果ガスの影響を見る。ゼロ会は、1つの温室効果ガスの影響を見る。
+LLM。多言語性と事実性と推論により、世界中の誰もが正確な根拠に基づき論理的に気候変動を理解できる基盤を構築します。
+*  多言語性: 英語主体の排出データをLLMが多言語化。世界中の誰もが自国語で環境データにアクセス可能にします。
+*  事実性: 衛星観測による厳密な数値を根拠にLLMが回答。根拠を明示し、嘘のない正確な情報提供を実現します。
+*  推論: 排出量の増減理由をLLMが論理的に分析。単なる数値から、背景にある原因や改善策の洞察を導きます。
+
+
+
+オープンデータ。
 
 ## Deployment Guide
 
@@ -47,13 +55,67 @@
 │   └── setup_env.sh
 ```
 
-### 1. Authenticate with Google Cloud
+## DeskTOP
 
+### 1. Authenticate with Google Cloud
 ```bash
-gcloud auth application-default login
 gcloud config set project [YOUR-PROJECT-ID]
 export PROJECT_ID=$(gcloud config get project)
+gcloud auth application-default login
 ```
+### 2. Clone the Repository
+```bash
+git clone https://github.com/shogoorg/za.git
+cd za
+```
+```bash
+git clone https://github.com/google-agentic-commerce/a2a-x402.git
+```
+### 3. Configure Environment
+```bash
+dos2unix setup/setup_env.sh
+chmod +x setup/setup_env.sh
+./setup/setup_env.sh
+```
+### 4. Provision BigQuery
+```bash
+dos2unix setup/setup_bigquery.sh
+chmod +x setup/setup_bigquery.sh
+./setup/setup_bigquery.sh
+```
+Could have
+```bash
+python3 setup/setup_csv.py
+```
+## 5. Deployment Guide
+```bash
+export GOOGLE_API_KEY="<Your API KEY>"
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+```bash
+python -m server
+python -m server --host 0.0.0.0
+```
+```bash
+source .venv/bin/activate
+cd adk_agent
+adk web --port=8000
+```
+
+## GCP
+
+### 1. Authenticate with Google Cloud
+```bash
+gcloud auth list
+gcloud config get project
+export PROJECT_ID=$(gcloud config get project)
+```
+```bash
+gcloud auth application-default login
+```
+⚠️注: ADK は OAuth 2.0 トークンを自動的に更新しません。チャットセッションが 60 分以上続く場合は、上記のコマンドを使用して再認証が必要になる場合があります。
 
 ### 2. Clone the Repository
 ```bash
@@ -65,34 +127,12 @@ git clone https://github.com/google-agentic-commerce/a2a-x402.git
 ```
 
 ### 3. Configure Environment
-
 ```bash
 dos2unix setup/setup_env.sh
 chmod +x setup/setup_env.sh
 ./setup/setup_env.sh
 ```
-Could have
-
-```bash
-gcloud services enable \
-  bigquery.googleapis.com \
-  aiplatform.googleapis.com \
-  apikeys.googleapis.com \
-  mapstools.googleapis.com \
-  cloudresourcemanager.googleapis.com
-gcloud beta services mcp enable mapstools.googleapis.com --project=$PROJECT_ID
-gcloud beta services mcp enable bigquery.googleapis.com --project=$PROJECT_ID
-```
-
-```bash
-gcloud alpha services api-keys create \
-    --display-name="za-key" \
-    --api-target=service=mapstools.googleapis.com \
-    --format="value(keyString)"
-```
-
 ### 4. Provision BigQuery
-
 ```bash
 dos2unix setup/setup_bigquery.sh
 chmod +x setup/setup_bigquery.sh
@@ -102,39 +142,24 @@ Could have
 ```bash
 python3 setup/setup_csv.py
 ```
-```bash
-sources_admins_plans
-sources_agent_short
-plans_agent_short
-```
 ## 5. Deployment Guide
-
-climate_sourcesとclimate_plans
-
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install google-adk
-```
-```bash
-cd adk_agent
-adk web
-```
-market
-
-```bash
-export GOOGLE_API_KEY="<Your API KEY>"
-source .venv/bin/activate
-pip uninstall google-adk
 pip install -r requirements.txt
 ```
 ```bash
-python -m server
+export GOOGLE_API_KEY="<Your API KEY>"
+python -m server --host 0.0.0.0
 ```
+新規ターミナル
 ```bash
+cd za
 source .venv/bin/activate
+cd adk_agent
 adk web --port=8000
 ```
+
 ### 6. Chat with the Agent (Sample Narrative: Emission Strategy)
 climate_sources
 1. 東京都の排出量を追跡したい。
