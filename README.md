@@ -159,7 +159,7 @@ adk web --port=8000
 climate_sourcesエージェントを選択
 1. 東京都の排出量を追跡したい。
 2. electricity-generation（発電）
-3. （地図を表示しますか?）はい
+3. （地図を表示しますか?）SHINAGAWA (品川発電所)の地図を表示
 4. レポートを作成したい。
 ![Demo Flow](assets/climate_sources.png)
 　[排出量を追跡のセッション](https://gist.github.com/shogoorg/c521bcdab975ab5cba26017d2744de63)
